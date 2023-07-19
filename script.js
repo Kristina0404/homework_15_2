@@ -4,19 +4,23 @@
 
 const objElement = document.getElementById("text");
 
-async function loadArray(){
-    const res = await fetch('https://jsonplaceholder.typicode.com/users/1/todos');
-    const obj = await res.json();
-    console.log(obj);
-    obj.forEach(element => {
-        console.log(element);
-        const {userId, id, title, completed}= element;
-        objElement.textContent += `userId: ${userId} id: ${id} title: ${title} completed: ${completed}`;
-    });
-} 
- loadArray();
-
  
+ function loadArray(){
+    let response = fetch('https://jsonplaceholder.typicode.com/users/1/todos');
+    response.then((response)=>{
+        dataPromise =response.json();
+        dataPromise.then((obj)=>{
+            console.log(obj);
+            obj.forEach(element => {
+                console.log(element);
+                const {userId, id, title, completed}= element;
+                objElement.textContent += `userId: ${userId} id: ${id} title: ${title} completed: ${completed}`;
+            });
+        }
+        )
+    });
 
+}
+loadArray();
 
 
